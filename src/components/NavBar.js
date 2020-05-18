@@ -1,25 +1,54 @@
 import React, { Component } from "react";
-import Nav from 'react-bootstrap/Nav'
-import { NavLink } from "react-router-dom";
+import { Menu, Segment, Image, Button,Icon } from "semantic-ui-react";
+import { connect } from "react-redux";
+import "./App.css";
+import { setAuthedUser } from "../actions/authUser";
 
 class NavBar extends Component {
+  handleLogout =(e)=> {
+      e.preventDefault()
+      this.props.dispatch(setAuthedUser(null))
+  }
   render() {
+    const { authUser, users } = this.props;
     return (
-      <Nav variant="tabs" defaultActiveKey="/home">
-        <Nav.Item>
-        <NavLink to="/home">Active</NavLink>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="link-1">New Question</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="link-2">
-           Leaderboard
-          </Nav.Link>
-        </Nav.Item>
-      </Nav>
+      <Segment inverted>
+        <Menu inverted pointing secondary>
+          <Menu.Item name="home" />
+          <Menu.Item name="new question" />
+          <Menu.Item name="leaderboard" />
+          <Menu.Menu position="right">
+            <Menu.Item>
+              <span>
+                <Image
+                  src={users[authUser].avatarURL}
+                  avatar
+                  spaced="right"
+                  verticalAlign="middle"
+                />
+                Hello,{users[authUser].name}
+              </span>
+            </Menu.Item>
+            <Menu.Item>
+              <Button animated="vertical" style={{backgroundColor: 'white',fontSize:'15px'}} onClick={this.handleLogout}>
+                <Button.Content hidden>Logout</Button.Content>
+                <Button.Content visible>
+                  <Icon name="sign-out" />
+                </Button.Content>
+              </Button>
+            </Menu.Item>
+          </Menu.Menu>
+        </Menu>
+      </Segment>
     );
   }
 }
 
-export default NavBar;
+function mapStateToProps({ authUser, users }) {
+  return {
+    authUser,
+    users,
+  };
+}
+
+export default connect(mapStateToProps)(NavBar);

@@ -30,6 +30,15 @@
   padding: 30px 80px 50px 80px;
 }
 
+
+
+.item{
+  font-size: 25px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  height: 5px;
+}
+
+
 .submitBtn {
   text-transform: uppercase;
   margin: 35px auto;

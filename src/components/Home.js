@@ -3,10 +3,12 @@ import NavBar from './NavBar'
 import {connect} from 'react-redux'
 import {formatQuestion} from '../utils/_DATA'
 
+
 class Home extends Component{
     render(){
         return(
             <div>
+              <NavBar/>
               <h1>This is home page</h1> 
             </div>
         )

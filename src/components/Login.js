@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./App.css";
-import { handleInitialData } from "../actions/shared";
 import { Card } from "react-bootstrap";
 import LoadingBar from 'react-redux-loading-bar';
 import { setAuthedUser } from "../actions/authUser";
@@ -10,9 +9,6 @@ import { setAuthedUser } from "../actions/authUser";
 class Login extends Component {
   state = {
     selectedUser : ''
-  }
-  componentDidMount() {
-    this.props.dispatch(handleInitialData());
   }
   handleSubmit = (e) =>{
       e.preventDefault()
