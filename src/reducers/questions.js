@@ -1,6 +1,15 @@
-import {combineReducers} from 'redux'
-import users from './users'
+import { RECEIVE_QUESTIONS } from "../actions/questions";
 
-export default combineReducers({
-    users
-})
+
+export default function questions(state = {}, action) {
+  switch (action.type) {
+    case RECEIVE_QUESTIONS:
+      return {
+        ...state,
+        ...action.questions,
+      };
+    
+    default:
+      return state;
+  }
+}

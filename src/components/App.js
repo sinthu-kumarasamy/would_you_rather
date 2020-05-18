@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./App.css";
-import { BrowserRouter as Router, Route,Redirect} from "react-router-dom";
+import { BrowserRouter as Router, Route} from "react-router-dom";
 import Home from './Home'
 import Login from './Login'
 
@@ -11,10 +11,7 @@ class App extends Component {
     return (
       <Router>   
             {this.props.loading === true ? <Route path='/' exact component={Login}/> : (
-             <Route path="/">
-             <Redirect exact to="/home"/>
-             <Route path="/home" component={Home}/>
-           </Route> 
+             <Route path="/" component={Home}/>
             )}
       </Router>   
     )
