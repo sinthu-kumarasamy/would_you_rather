@@ -67,7 +67,9 @@
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
-
+/* .ui.inverted.segment{
+  margin-top: 15px;
+} */
 .tab .ui.tabular.menu .item {
   flex: 1 1 auto;
   background: none #f6f6f6;

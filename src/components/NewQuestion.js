@@ -1,8 +1,37 @@
 import React, { Component } from "react";
 import NavBar from "./NavBar";
 import { Card, Button, Form,Divider } from "semantic-ui-react";
+import { handleAddQuestion } from "../actions/questions";
+import {connect} from 'react-redux'
 
 class NewQuestion extends Component {
+    state = {
+        optionOne : '',
+        optionTwo : ''
+    }
+    handleSubmit = (e) =>{
+        e.preventDefault()
+        const {optionOne,optionTwo} = this.state
+        const {dispatch,history,authUser} = this.props
+        if(optionOne!=='' && optionTwo!==''){
+           dispatch(handleAddQuestion({
+                optionOne,
+                optionTwo,
+                authUser
+            }))
+        }
+        history.push('/')
+    }
+
+    handleInputOne = (e) =>{
+        e.preventDefault()
+        this.setState({optionOne : e.target.value})
+    }
+
+    handleInputTwo = (e) =>{
+        e.preventDefault()
+        this.setState({optionTwo : e.target.value})
+    }
   render() {
     return (
       <div>
@@ -14,20 +43,20 @@ class NewQuestion extends Component {
           <Card.Content>
             <Card.Header>Would You Rather</Card.Header>
             <Card.Description style={{padding:'3px'}}>
-              <Form>
+              <Form >
                 <Form.Field>
-                  <input placeholder="Enter Option One" />
+                  <input name='optionOne' placeholder="Enter Option One" onChange={this.handleInputOne}/>
                 </Form.Field>
                 <Divider horizontal>Or</Divider>
                 <Form.Field>
-                  <input placeholder="Enter Option Two" />
+                  <input  name='optionTwo' placeholder="Enter Option Two" onChange={this.handleInputTwo}/>
                 </Form.Field>
                 <div className="ui two buttons">
                   <Button
                     type="submit"
                     basic
                     color="blue"
-                    onClick={(e) => this.handleButtonClick(e)}
+                    onClick = {this.handleSubmit}
                   >
                     Submit
                   </Button>
@@ -41,4 +70,10 @@ class NewQuestion extends Component {
   }
 }
 
-export default NewQuestion;
+function mapStateToProps({authUser}){
+    return{
+        authUser
+    }
+}
+
+export default connect(mapStateToProps)(NewQuestion);

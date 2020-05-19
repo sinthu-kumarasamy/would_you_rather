@@ -3,13 +3,15 @@ import NavBar from "./NavBar";
 import { connect } from "react-redux";
 import { Tab } from "semantic-ui-react";
 import UserCard from "./UserCard";
+import LoadingBar from 'react-redux-loading-bar';
 
 class Home extends Component {
   render() {
     const { answeredQuestions, unansweredQuestions } = this.props;
     return (
       <div>
-        <NavBar />
+        <LoadingBar style={{ backgroundColor: '#780743', height: '5px' }}/>
+        <NavBar/>
         <Tab
           className="tab"
           panes={panes({ answeredQuestions, unansweredQuestions })}
