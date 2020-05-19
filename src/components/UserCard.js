@@ -1,43 +1,52 @@
 import React, { Component } from "react";
 import { Image, Button, Card } from "semantic-ui-react";
 import {connect} from "react-redux"
-import { formatQuestion } from "../utils/_DATA";
+import {Link,withRouter} from 'react-router-dom'
 
 class UserCard extends Component {
+  
+    handleButtonClick = (e,id) =>{
+        e.preventDefault()
+        this.props.history.push(`/questions/${id}`)   
+    }
+
   render() {
-      const {question,author} = this.props
-    return (
-         <Card className="userCard">
-            <Card.Content>
-            <Image
-                floated="right"
-                size='tiny' circular 
-                src={author.avatarURL}
-            />
-            <Card.Header>{author.name}</Card.Header>
-            <Card.Meta>Would You Rather</Card.Meta>
-            <Card.Description>
-                {question.optionOne.text} or {question.optionTwo.text} 
-            </Card.Description>
-            </Card.Content>
-            <Card.Content extra>
-            <div className="ui two buttons">
-                <Button basic color="green">
-                View Poll
-                </Button>
-            </div>
-            </Card.Content>
-        </Card>
-    )
-  }
+    const {question,author,id} = this.props
+     return (
+        <Link to={`/questions/${id}`}>
+            <Card className="userCard">
+                <Card.Content>
+                <Image
+                    floated="right"
+                    size='tiny' circular 
+                    src={author.avatarURL}
+                />
+                <Card.Header>{author.name}</Card.Header>
+                <Card.Meta>Would You Rather</Card.Meta>
+                <Card.Description>
+                    {question.optionOne.text} or {question.optionTwo.text} 
+                </Card.Description>
+                </Card.Content>
+                <Card.Content extra>
+                <div className="ui two buttons">
+                    <Button basic color="green" onClick={(e)=>this.handleButtonClick(e,question.id)}>
+                    View Poll
+                    </Button>
+                </div>
+                </Card.Content>
+            </Card>
+         </Link>
+        )
+    }
 }
 
-function mapStateToProps({ questions, authUser, users },{question}) {
+function mapStateToProps({ questions, users },{id}) {
+  const question = questions[id]
   const author = users[question.author];
     return {
        question,
-       author 
+       author,
     }
   }
 
-export default connect(mapStateToProps)(UserCard);
+export default withRouter(connect(mapStateToProps)(UserCard));

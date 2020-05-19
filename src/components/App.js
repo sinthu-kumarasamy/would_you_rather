@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./App.css";
-import { BrowserRouter as Router, Route,Switch} from "react-router-dom";
+import { BrowserRouter as Router, Route} from "react-router-dom";
 import Home from './Home'
 import Login from './Login'
 import { handleInitialData } from "../actions/shared";
-import UserCard from './UserCard'
+import AnswerPoll from "./AnswerPoll";
 
 class App extends Component {
   componentDidMount() {
@@ -16,17 +16,17 @@ class App extends Component {
     return (
       <Router>   
             {this.props.loading === true ? <Route path='/' exact component={Login}/> : (
-              <Switch>
-             <Route path="/" component={Home}/>
-             <Route path="/questions/:question_id" component={UserCard} />
-             </Switch>
+             <div>
+             <Route path="/" exact component={Home} />
+             <Route path="/questions/:id" component={AnswerPoll} />
+           </div>
             )}
       </Router>   
     )
   }
 }
 
-function mapStateToProps({ authUser }) {
+function mapStateToProps({ authUser}) {
   return {
     loading: authUser === null,
   };

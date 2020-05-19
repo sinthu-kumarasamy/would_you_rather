@@ -1,7 +1,7 @@
 import React,{Component} from 'react'
 import NavBar from './NavBar'
 
-class ViewResult extends Component{
+class AnswerPoll extends Component{
     render(){
         return(
             <div>
@@ -11,4 +11,4 @@ class ViewResult extends Component{
     }
 }
 
-export default ViewResult
+export default AnswerPoll
