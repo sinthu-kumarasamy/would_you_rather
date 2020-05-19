@@ -3,12 +3,13 @@ import { Menu, Segment, Image, Button,Icon } from "semantic-ui-react";
 import { connect } from "react-redux";
 import "./App.css";
 import { setAuthedUser } from "../actions/authUser";
-import {NavLink} from 'react-router-dom'
+import {NavLink,withRouter} from 'react-router-dom'
 
 class NavBar extends Component {
   handleLogout =(e)=> {
       e.preventDefault()
       this.props.dispatch(setAuthedUser(null))
+      this.props.history.push("/")  
   }
   render() {
     const { authUser, users } = this.props;
@@ -16,7 +17,7 @@ class NavBar extends Component {
       <Segment inverted>
         <Menu inverted pointing secondary>
           <Menu.Item  as={NavLink} exact to='/' name="home" />
-          <Menu.Item name="new question" />
+          <Menu.Item  as={NavLink} to='/add' name="new question" />
           <Menu.Item name="leaderboard" />
           <Menu.Menu position="right">
             <Menu.Item>
@@ -52,4 +53,4 @@ function mapStateToProps({ authUser, users }) {
   };
 }
 
-export default connect(mapStateToProps)(NavBar);
+export default withRouter(connect(mapStateToProps)(NavBar));

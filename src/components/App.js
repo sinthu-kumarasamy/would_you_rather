@@ -6,6 +6,7 @@ import Home from './Home'
 import Login from './Login'
 import { handleInitialData } from "../actions/shared";
 import AnswerPoll from "./AnswerPoll";
+import NewQuestion from "./NewQuestion"
 
 class App extends Component {
   componentDidMount() {
@@ -19,6 +20,7 @@ class App extends Component {
              <div>
              <Route path="/" exact component={Home} />
              <Route path="/questions/:id" component={AnswerPoll} />
+             <Route path="/add" component={NewQuestion} />
            </div>
             )}
       </Router>   
