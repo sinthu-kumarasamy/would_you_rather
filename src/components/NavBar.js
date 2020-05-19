@@ -3,6 +3,7 @@ import { Menu, Segment, Image, Button,Icon } from "semantic-ui-react";
 import { connect } from "react-redux";
 import "./App.css";
 import { setAuthedUser } from "../actions/authUser";
+import {NavLink} from 'react-router-dom'
 
 class NavBar extends Component {
   handleLogout =(e)=> {
@@ -14,7 +15,7 @@ class NavBar extends Component {
     return (
       <Segment inverted>
         <Menu inverted pointing secondary>
-          <Menu.Item name="home" />
+          <Menu.Item  as={NavLink} exact to='/' name="home" />
           <Menu.Item name="new question" />
           <Menu.Item name="leaderboard" />
           <Menu.Menu position="right">

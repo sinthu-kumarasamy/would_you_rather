@@ -8,7 +8,7 @@ import { setAuthedUser } from "../actions/authUser";
 
 class Login extends Component {
   state = {
-    selectedUser : ''
+    selectedUser : '',
   }
   handleSubmit = (e) =>{
       e.preventDefault()
@@ -35,7 +35,7 @@ class Login extends Component {
                   return <option key={id} value={id}>{id}</option>;
                 })}
               </select><br/>
-              <button className="submitBtn">Sign in</button>
+              <button className="submitBtn" disabled={this.state.selectedUser===''?true:false}>Sign in</button>
             </form>
           </Card.Body>
         </Card>
