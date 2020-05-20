@@ -18,7 +18,7 @@ class NavBar extends Component {
         <Menu inverted pointing secondary>
           <Menu.Item  as={NavLink} exact to='/' name="home" />
           <Menu.Item  as={NavLink} to='/add' name="new question" />
-          <Menu.Item name="leaderboard" />
+          <Menu.Item as={NavLink} to='/leaderboard' name="leaderboard" />
           <Menu.Menu position="right">
             <Menu.Item>
               <span>

@@ -2,12 +2,25 @@ import React, { Component } from "react";
 import NavBar from "./NavBar";
 import { connect } from "react-redux";
 import { Image, Button, Card, Checkbox,Message,Progress,Label} from "semantic-ui-react";
+import { handleAddAnswer } from "../actions/questions";
 
 class AnswerPoll extends Component {
   state = {
-    value: "",
+    selectedValue: "",
   };
-  handleChange = (e, { value }) => this.setState({ value });
+  handleChange = (e,{value}) => {
+    this.setState({selectedValue : value})
+  }
+
+  handleButtonClick = (e) =>{
+    e.preventDefault()
+    const {dispatch,authUser,question_id} = this.props
+    const {selectedValue} = this.state
+    if(selectedValue!==null){
+      dispatch(handleAddAnswer({authUser,answer:selectedValue,question_id}))
+    }
+    
+  }
   render() {
     const { isAnswered, question, author,authUser} = this.props;
     const totalVotes = question.optionOne.votes.length + question.optionTwo.votes.length
@@ -37,7 +50,7 @@ class AnswerPoll extends Component {
                   label={question.optionOne.text}
                   name="checkboxRadioGroup"
                   value="optionOne"
-                  checked={this.state.value === "optionOne"}
+                  checked={this.state.selectedValue === 'optionOne'}
                   onChange={this.handleChange}
                   style={{fontSize:'18px',fontWeight:'bold'}}
                 /><br/>
@@ -46,7 +59,7 @@ class AnswerPoll extends Component {
                   label={question.optionTwo.text}
                   name="checkboxRadioGroup"
                   value="optionTwo"
-                  checked={this.state.value === "optionTwo"}
+                  checked={this.state.selectedValue === 'optionTwo'}
                   onChange={this.handleChange}
                   style={{fontSize:'18px',fontWeight:'bold'}}
                 />
@@ -57,7 +70,7 @@ class AnswerPoll extends Component {
                 <Button
                   basic
                   color="green"
-                  onClick={(e) => this.handleButtonClick(e, question.id)}
+                  onClick={this.handleButtonClick}
                 >
                   Submit
                 </Button>
@@ -113,7 +126,8 @@ function mapStateToProps({ questions, users, authUser }, { match }) {
     question,
     isAnswered,
     author,
-    authUser
+    authUser,
+    question_id
   };
 }
 
