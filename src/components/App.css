@@ -70,6 +70,21 @@
 /* .ui.inverted.segment{
   margin-top: 15px;
 } */
+
+.ui.card.leaderboard{
+  margin-left:600px;
+  font-size:18px;
+  width:400px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
+}
+
+.ui.left.corner.label{
+  left: -19px;
+  top: -20px;
+  background-color:teal;
+  color : teal;
+}
 .tab .ui.tabular.menu .item {
   flex: 1 1 auto;
   background: none #f6f6f6;

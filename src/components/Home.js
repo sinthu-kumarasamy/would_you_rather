@@ -10,8 +10,8 @@ class Home extends Component {
     const { answeredQuestions, unansweredQuestions } = this.props;
     return (
       <div>
-        <LoadingBar style={{ backgroundColor: '#780743', height: '5px' }}/>
         <NavBar/>
+        <LoadingBar style={{ backgroundColor: '#780743', height: '5px' }}/>
         <Tab
           className="tab"
           panes={panes({ answeredQuestions, unansweredQuestions })}

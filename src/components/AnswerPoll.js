@@ -3,6 +3,8 @@ import NavBar from "./NavBar";
 import { connect } from "react-redux";
 import { Image, Button, Card, Checkbox,Message,Progress,Label} from "semantic-ui-react";
 import { handleAddAnswer } from "../actions/questions";
+import LoadingBar from 'react-redux-loading-bar';
+import {handleUpdateUserData} from '../actions/users'
 
 class AnswerPoll extends Component {
   state = {
@@ -18,6 +20,7 @@ class AnswerPoll extends Component {
     const {selectedValue} = this.state
     if(selectedValue!==null){
       dispatch(handleAddAnswer({authUser,answer:selectedValue,question_id}))
+      dispatch(handleUpdateUserData())
     }
     
   }
@@ -33,6 +36,7 @@ class AnswerPoll extends Component {
     return (
       <div>
         <NavBar />
+        <LoadingBar style={{ backgroundColor: '#780743', height: '5px' }}/>
         {isAnswered === false ? (
           <Card className="userCard" style={{marginLeft:'600px',fontSize:'20px'}}>
             <Card.Content>

@@ -23,3 +23,7 @@ import {
   export function saveQuestion (info) {
     return _saveQuestion(info)
   }
+
+  export function getUsers(){
+    return _getUsers()
+  }
