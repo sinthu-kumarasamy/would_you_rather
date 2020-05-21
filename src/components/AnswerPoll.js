@@ -6,12 +6,14 @@ import { handleAddAnswer } from "../actions/questions";
 import LoadingBar from 'react-redux-loading-bar';
 import {handleUpdateUserData} from '../actions/users'
 
+
 class AnswerPoll extends Component {
   state = {
     selectedValue: "",
+    enableBtn:true
   };
   handleChange = (e,{value}) => {
-    this.setState({selectedValue : value})
+    this.setState({selectedValue : value,enableBtn:false})
   }
 
   handleButtonClick = (e) =>{
@@ -33,6 +35,8 @@ class AnswerPoll extends Component {
     const optionTwo = question.optionTwo.votes.filter((name)=> name === authUser)
     const optionOneAnswer = optionOne.length !== 0 ? true: false
     const optionTwoAnswer = optionTwo.length !== 0 ? true: false
+    
+    
     return (
       <div>
         <NavBar />
@@ -74,6 +78,7 @@ class AnswerPoll extends Component {
                 <Button
                   basic
                   color="green"
+                  disabled={this.state.enableBtn}
                   onClick={this.handleButtonClick}
                 >
                   Submit

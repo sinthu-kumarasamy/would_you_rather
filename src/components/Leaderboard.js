@@ -44,7 +44,6 @@ class Leaderboard extends Component{
 }
 
 function mapStateToProps({ users}) {
-    console.log(users)
     const userData = Object.keys(users).map((user)=>{
         const user_data = {
             name : users[user].name,

@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./App.css";
-import { BrowserRouter as Router, Route} from "react-router-dom";
+import { BrowserRouter as Router, Route,Switch} from "react-router-dom";
 import Home from './Home'
 import Login from './Login'
 import { handleInitialData } from "../actions/shared";
 import AnswerPoll from "./AnswerPoll";
 import NewQuestion from "./NewQuestion"
 import Leaderboard from "./Leaderboard";
+import PrivateRoute from './PrivateRoute'
+
 
 class App extends Component {
   componentDidMount() {
@@ -16,15 +18,16 @@ class App extends Component {
  
   render() {
     return (
-      <Router>   
-            {this.props.loading === true ? <Route path='/' exact component={Login}/> : (
+      <Router>  
              <div>
-             <Route path="/" exact component={Home} />
-             <Route path="/questions/:id" component={AnswerPoll} />
-             <Route path="/add" component={NewQuestion} />
-             <Route path="/leaderboard" component={Leaderboard} />
+             <Switch>
+									<Route path="/" exact component={Login}/>
+									<PrivateRoute path='/home' exact component={Home} />
+									<PrivateRoute path='/add' exact component={NewQuestion} />
+									<PrivateRoute path='/question/:id'exact component={AnswerPoll} />
+									<PrivateRoute path='/leaderboard' component={Leaderboard} />
+								</Switch>
            </div>
-            )}
       </Router>   
     )
   }

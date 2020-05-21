@@ -8,7 +8,8 @@ import {handleUpdateUserData} from '../actions/users'
 class NewQuestion extends Component {
     state = {
         optionOne : '',
-        optionTwo : ''
+        optionTwo : '',
+        enableBtn:true
     }
     handleSubmit = (e) =>{
         e.preventDefault()
@@ -32,7 +33,7 @@ class NewQuestion extends Component {
 
     handleInputTwo = (e) =>{
         e.preventDefault()
-        this.setState({optionTwo : e.target.value})
+        this.setState({optionTwo : e.target.value, enableBtn:false})
     }
   render() {
     return (
@@ -58,6 +59,7 @@ class NewQuestion extends Component {
                     type="submit"
                     basic
                     color="blue"
+                    disabled={this.state.enableBtn}
                     onClick = {this.handleSubmit}
                   >
                     Submit

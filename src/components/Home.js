@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Tab } from "semantic-ui-react";
 import UserCard from "./UserCard";
 import LoadingBar from 'react-redux-loading-bar';
+import {Link} from 'react-router-dom'
 
 class Home extends Component {
   render() {
@@ -28,7 +29,8 @@ const panes = (props) => {
       render: () => (
         <Tab.Pane>
           {props.unansweredQuestions.map((question) => (
-            <UserCard key={question.id} id={question.id} answered="false" />
+             <Link to={`question/${question['id']}`} key={question.id}>
+            <UserCard  id={question.id}  /></Link>
           ))}
         </Tab.Pane>
       ),
@@ -38,7 +40,8 @@ const panes = (props) => {
       render: () => (
         <Tab.Pane>
           {props.answeredQuestions.map((question) => (
-            <UserCard key={question.id} id={question.id} answered="true" />
+             <Link to={`question/${question['id']}`}  key={question.id}>
+             <UserCard id={question.id}  /></Link>
           ))}
         </Tab.Pane>
       ),

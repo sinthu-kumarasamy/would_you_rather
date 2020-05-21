@@ -1,20 +1,13 @@
 import React, { Component } from "react";
 import { Image, Button, Card } from "semantic-ui-react";
 import {connect} from "react-redux"
-import {Link,withRouter} from 'react-router-dom'
 
 class UserCard extends Component {
   
-    handleButtonClick = (e,id) =>{
-        e.preventDefault()
-        this.props.history.push(`/questions/${id}`)   
-    }
-
   render() {
-    const {question,author,id} = this.props
+    const {question,author} = this.props
      return (
-        <Link to={`/questions/${id}`}>
-            <Card className="userCard">
+            <Card  className="userCard">
                 <Card.Content>
                 <Image
                     floated="right"
@@ -29,13 +22,12 @@ class UserCard extends Component {
                 </Card.Content>
                 <Card.Content extra>
                 <div className="ui two buttons">
-                    <Button basic color="green" onClick={(e)=>this.handleButtonClick(e,question.id)}>
+                    <Button basic color="green">
                     View Poll
                     </Button>
                 </div>
                 </Card.Content>
             </Card>
-         </Link>
         )
     }
 }
@@ -49,4 +41,4 @@ function mapStateToProps({ questions, users },{id}) {
     }
   }
 
-export default withRouter(connect(mapStateToProps)(UserCard));
+export default connect(mapStateToProps)(UserCard);
